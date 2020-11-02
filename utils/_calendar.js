@@ -1,5 +1,5 @@
-import AsyncStorage from '@react-native-community/async-storage'
-import { getMetricMetaInfo, timeToString } from './helpers'
+import { AsyncStorage } from 'react-native'
+import { getMetricInfo, timeToString } from './helpers'
 
 export const CALENDAR_STORAGE_KEY = 'UdaciFitness:calendar'
 
@@ -8,7 +8,7 @@ function getRandomNumber (max) {
 }
 
 function setDummyData () {
-  const { run, bike, swim, sleep, eat } = getMetricMetaInfo()
+  const { run, bike, swim, sleep, eat } = getMetricInfo()
 
   let dummyData = {}
   const timestamp = Date.now()

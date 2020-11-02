@@ -4,6 +4,7 @@ import { getMetricInfo, timeToString } from '../utils/helpers';
 import UdaciSlider from './UdaciSlider';
 import UdaciSteppers from './UdaciSteppers';
 import DateHeader from './DateHeader';
+import { submitEntry, removeEntry } from '../utils/api';
 
 function SubmitBtn({ onPress }) {
 	return (
@@ -59,9 +60,19 @@ export default class AddEntry extends Component {
 
 		// Navigate to home
 
-		// Save to "DB"
+        // Save to "DB"
+        submitEntry({ key, entry });
 
 		// Clear local notification
+    };
+    reset = () => {
+		const key = timeToString();
+		// Update Redux
+
+		// Route to Home
+
+		// Update "DB"
+		removeEntry(key);
 	};
 	render() {
         const metaInfo = getMetricInfo();
