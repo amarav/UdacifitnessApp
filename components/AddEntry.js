@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
-import { getMetricMetaInfo, timeToString } from '../utils/helpers';
+import { getMetricInfo, timeToString } from '../utils/helpers';
 import UdaciSlider from './UdaciSlider';
 import UdaciSteppers from './UdaciSteppers';
 import DateHeader from './DateHeader';
@@ -23,7 +23,7 @@ export default class AddEntry extends Component {
 		eat: 0,
 	};
 	increment = (metric) => {
-		const { max, step } = getMetricMetaInfo(metric);
+		const { max, step } = getMetricInfo(metric);
 
 		this.setState((state) => {
 			const count = state[metric] + step;
@@ -36,7 +36,7 @@ export default class AddEntry extends Component {
 	};
 	decrement = (metric) => {
 		this.setState((state) => {
-			const count = state[metric] - getMetricMetaInfo(metric).step;
+			const count = state[metric] - getMetricInfo(metric).step;
 
 			return {
 				...state,
@@ -64,11 +64,20 @@ export default class AddEntry extends Component {
 		// Clear local notification
 	};
 	render() {
-		const metaInfo = getMetricMetaInfo();
+        const metaInfo = getMetricInfo();
+        
+        if (this.props.alreadyLogged) {
+			return (
+				<View>
+					<Ionicons name={'ios-happy-outline'} size={100} />
+					<Text>You already logged your information for today.</Text>
+					<TextButton onPress={this.reset}>Reset</TextButton>
+				</View>
+			);
+		}
 
 		return (
 			<View>
-                <Text>inside add entry</Text> 
                 <DateHeader date={new Date().toLocaleDateString()} />
 				{Object.keys(metaInfo).map((key) => {
 					const { getIcon, type, ...rest } = metaInfo[key];
