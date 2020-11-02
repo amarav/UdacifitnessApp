@@ -11,7 +11,7 @@ export default class App extends React.Component {
 		return (
 			<View>
 			<Provider store={this.store}>
-				<View>
+				<View style={{ flex: 1 }}>
 					<AddEntry />
 				</View>
 			</Provider>
