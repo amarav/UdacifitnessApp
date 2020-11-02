@@ -68,8 +68,8 @@ export default class AddEntry extends Component {
 
 		return (
 			<View>
-                {/* //https://stackoverflow.com/questions/42218022/react-native-reacts-differently-when-not-debugging-remotely */}
-				<DateHeader date={new Date().toLocaleDateString()} />
+                <Text>inside add entry</Text> 
+                <DateHeader date={new Date().toLocaleDateString()} />
 				{Object.keys(metaInfo).map((key) => {
 					const { getIcon, type, ...rest } = metaInfo[key];
 					const value = this.state[key];
